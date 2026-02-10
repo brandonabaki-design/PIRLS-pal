@@ -165,7 +165,8 @@
                 <div class="relative bg-white p-4 rounded-3xl shadow-2xl border border-white/50">
                     <div class="aspect-video rounded-2xl overflow-hidden bg-slate-900 shadow-inner relative">
                         <video class="w-full h-full object-cover" controls preload="metadata">
-                            <source src="Your_PIRLS_Reading_Adventure!.mp4" type="video/mp4">
+                            <!-- UPDATED VIDEO FILENAME HERE -->
+                            <source src="PIRLS_Intro_Video.mp4" type="video/mp4">
                             Your browser does not support the video tag.
                         </video>
                     </div>
@@ -636,7 +637,19 @@
         // MOCK DATA (Simulation Mode for GitHub/Offline use)
         // ---------------------------------------------------------
         const mockStories = {
-            'Dinosaurs': `**The Text:**
+            'Dinosaurs': {
+                'Easy': `**The Text:**
+The T-Rex was a very big dinosaur. It had huge teeth. It walked on two legs. It was the king of the jungle!
+
+**Quick Question:**
+How many legs did the T-Rex walk on?
+* A) Four legs
+* B) Two legs
+* C) Six legs
+
+**Answer:**
+B) Two legs. The text says "It walked on two legs."`,
+                'Medium': `**The Text:**
 Long ago, the T-Rex was the king of the dinosaurs. It had huge teeth and tiny arms. Even though its arms were small, it was very strong. The T-Rex walked on two legs and hunted for food in the jungle.
 
 **Quick Question:**
@@ -647,8 +660,31 @@ What is true about the T-Rex?
 
 **Answer:**
 C) It was very strong. The text says "it was very strong" even though it had small arms.`,
+                'Hard': `**The Text:**
+The Tyrannosaurus Rex was a formidable predator during the Cretaceous period. Despite having disproportionately small forelimbs, its jaw power was immense. Paleontologists believe it was a scavenger as well as a hunter.
 
-            'Space Adventure': `**The Text:**
+**Quick Question:**
+What does the word "immense" suggest about the T-Rex's jaw?
+* A) It was very weak.
+* B) It was extremely powerful.
+* C) It was broken.
+
+**Answer:**
+B) It was extremely powerful. In this context, "immense" describes the great power of its jaw.`
+            },
+            'Space Adventure': {
+                'Easy': `**The Text:**
+Mia went to the moon in a rocket. The moon was grey and quiet. She jumped very high. It was fun to float in space!
+
+**Quick Question:**
+What color was the moon?
+* A) Blue
+* B) Grey
+* C) Green
+
+**Answer:**
+B) Grey. The text says "The moon was grey and quiet."`,
+                'Medium': `**The Text:**
 Mia looked out the window of her rocket ship. The moon was getting closer! It looked like a big, grey rock with holes in it. "Preparing for landing," she said. She was ready to be the first kid to walk on the moon.
 
 **Quick Question:**
@@ -659,8 +695,31 @@ What did the moon look like to Mia?
 
 **Answer:**
 B) A grey rock with holes. The text describes it as a "big, grey rock with holes in it."`,
+                'Hard': `**The Text:**
+As the lunar module descended, Mia checked her oxygen levels. The desolate, cratered surface of the moon loomed below. She felt a mix of exhilaration and anxiety knowing she was about to make history.
 
-            'Friendship': `**The Text:**
+**Quick Question:**
+How was Mia feeling as she descended?
+* A) Only happy.
+* B) Bored and tired.
+* C) Both excited and nervous.
+
+**Answer:**
+C) Both excited and nervous. The text says she felt "a mix of exhilaration (excitement) and anxiety (nervousness)." `
+            },
+            'Friendship': {
+                'Easy': `**The Text:**
+Leo had a toy car. Sam wanted to play. Leo gave Sam the car. Sam smiled. They played together all day.
+
+**Quick Question:**
+Why did Sam smile?
+* A) Leo gave him the car.
+* B) Sam went home.
+* C) The car was broken.
+
+**Answer:**
+A) Leo gave him the car. The text says "Leo gave Sam the car. Sam smiled."`,
+                'Medium': `**The Text:**
 Leo had a new toy car. His friend Sam really wanted to play with it. Leo felt sad when he had to share, but then he saw Sam smile. Playing together was much more fun than playing alone.
 
 **Quick Question:**
@@ -671,8 +730,31 @@ Why did playing together become fun?
 
 **Answer:**
 B) Because Leo liked seeing Sam smile. The text implies Leo realized sharing made them both happy.`,
-            
-            'default': `**The Text:**
+                'Hard': `**The Text:**
+Leo clutched his new model car tightly. He noticed Sam watching him with longing eyes. After a moment of internal conflict, Leo reluctantly handed over the prized vehicle. Seeing Sam's face light up made Leo realize that generosity was more rewarding than possession.
+
+**Quick Question:**
+What lesson did Leo learn?
+* A) That he should never share his toys.
+* B) That giving makes you feel better than keeping things.
+* C) That Sam didn't like cars.
+
+**Answer:**
+B) That giving makes you feel better than keeping things. The text says he realized "generosity was more rewarding than possession."`
+            },
+            'default': {
+                'Easy': `**The Text:**
+The library has many books. You can read about dogs or space. It is quiet there. I love to read.
+
+**Quick Question:**
+What can you read about?
+* A) Only dogs.
+* B) Dogs or space.
+* C) Nothing.
+
+**Answer:**
+B) Dogs or space. The text lists these two examples.`,
+                'Medium': `**The Text:**
 The library is a quiet place full of adventures. You can travel to the past, the future, or magical worlds just by opening a book. Every shelf holds a new surprise waiting to be discovered.
 
 **Quick Question:**
@@ -682,7 +764,19 @@ What can you find on every shelf?
 * C) A computer.
 
 **Answer:**
-A) A new surprise. The text says "Every shelf holds a new surprise."`
+A) A new surprise. The text says "Every shelf holds a new surprise."`,
+                'Hard': `**The Text:**
+Libraries serve as gateways to infinite knowledge. They are not merely repositories for books, but community hubs where imagination is ignited. In a digital age, the tactile experience of turning a page remains a unique pleasure for many.
+
+**Quick Question:**
+According to the text, what are libraries besides places for books?
+* A) They are just old buildings.
+* B) They are places that spark imagination.
+* C) They are places to sleep.
+
+**Answer:**
+B) They are places that spark imagination. The text calls them "community hubs where imagination is ignited."`
+            }
         };
 
         const mockBoosts = [
@@ -719,11 +813,16 @@ A) A new surprise. The text says "Every shelf holds a new surprise."`
                 if (type === 'boost') {
                     return mockBoosts[Math.floor(Math.random() * mockBoosts.length)];
                 } else {
-                    // Try to match topic keywords
-                    if (prompt.includes('Dinosaurs')) return mockStories['Dinosaurs'];
-                    if (prompt.includes('Space')) return mockStories['Space Adventure'];
-                    if (prompt.includes('Friendship')) return mockStories['Friendship'];
-                    return mockStories['default'];
+                    // Identify Topic
+                    let key = 'default';
+                    if (prompt.includes('Dinosaurs')) key = 'Dinosaurs';
+                    else if (prompt.includes('Space')) key = 'Space Adventure';
+                    else if (prompt.includes('Friendship')) key = 'Friendship';
+                    
+                    // Return story based on Topic AND Level
+                    // Fallback to Medium if level is somehow missing, or default topic if key is missing
+                    const topicData = mockStories[key] || mockStories['default'];
+                    return topicData[currentLevel] || topicData['Medium'];
                 }
             }
 
@@ -747,7 +846,8 @@ A) A new surprise. The text says "Every shelf holds a new surprise."`
             } catch (error) {
                 // Fallback to mock if API fails
                 if (type === 'boost') return mockBoosts[0];
-                return mockStories['default'];
+                const topicData = mockStories['default'];
+                return topicData[currentLevel] || topicData['Medium'];
             }
         }
 
