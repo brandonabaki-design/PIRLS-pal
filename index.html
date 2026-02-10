@@ -63,6 +63,15 @@
             60% { content: ' ...'; }
             80%, 100% { content: ' '; }
         }
+        /* Float Animation for Chat Button */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
     </style>
 </head>
 <body class="text-slate-700 overflow-x-hidden">
@@ -85,7 +94,6 @@
                     <a href="#what" class="text-blue-900 hover:text-blue-600 font-bold transition">What is it?</a>
                     <a href="#expect" class="text-blue-900 hover:text-blue-600 font-bold transition">The Mission</a>
                     <a href="#practice" class="text-blue-900 hover:text-blue-600 font-bold transition">Practice Zone ✨</a>
-                    <a href="#chat" class="text-blue-900 hover:text-blue-600 font-bold transition">Ask AI 🤖</a>
                 </div>
             </div>
         </div>
@@ -118,7 +126,7 @@
                 <!-- Video Container -->
                 <div class="relative bg-white p-4 rounded-3xl shadow-2xl border border-white/50">
                     <div class="aspect-video rounded-2xl overflow-hidden bg-slate-900 shadow-inner relative">
-                        <video class="w-full h-full object-cover" controls preload="metadata" poster="https://placehold.co/1280x720/1e293b/ffffff?text=Start+Your+Adventure+▶">
+                        <video class="w-full h-full object-cover" controls preload="metadata">
                             <source src="Your_PIRLS_Reading_Adventure!.mp4" type="video/mp4">
                             Your browser does not support the video tag.
                         </video>
@@ -198,7 +206,7 @@
                 <p class="text-slate-600 max-w-2xl mx-auto">You will be given a booklet or a tablet with interesting things to read. There are two main types of reading you will do.</p>
             </div>
 
-            <div class="grid md:grid-cols-2 gap-8">
+            <div class="grid md:grid-cols-2 gap-8 mb-12">
                 <!-- Card 1 -->
                 <div class="bg-white p-8 rounded-2xl shadow-sm border border-blue-100 card-hover relative overflow-hidden">
                     <div class="absolute top-0 right-0 w-32 h-32 bg-orange-100 rounded-bl-full -mr-16 -mt-16 z-0"></div>
@@ -227,6 +235,41 @@
                     </div>
                 </div>
             </div>
+
+            <!-- NEW: Question Types Breakdown -->
+            <div class="bg-white rounded-3xl p-8 md:p-10 border border-indigo-100 shadow-lg relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-indigo-400 to-purple-400"></div>
+                <h3 class="text-2xl font-bold text-center text-indigo-900 mb-10">What do the questions look like?</h3>
+                
+                <div class="grid md:grid-cols-2 gap-10 relative z-10">
+                    <!-- Type A -->
+                    <div class="flex gap-5 items-start">
+                        <div class="bg-yellow-100 p-4 rounded-2xl text-yellow-600 shrink-0 shadow-sm">
+                            <i data-lucide="check-square" class="w-8 h-8"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-xl text-slate-800 mb-2">Multiple Choice</h4>
+                            <p class="text-slate-600 leading-relaxed">
+                                You will see a question and 4 possible answers (A, B, C, D). You just have to click or circle the one that fits best. It's like finding the right puzzle piece!
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Type B -->
+                    <div class="flex gap-5 items-start">
+                        <div class="bg-teal-100 p-4 rounded-2xl text-teal-600 shrink-0 shadow-sm">
+                            <i data-lucide="pencil" class="w-8 h-8"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-xl text-slate-800 mb-2">Written Answers</h4>
+                            <p class="text-slate-600 leading-relaxed">
+                                Sometimes, you will need to write the answer in your own words. Don't panic! Usually, just one or two sentences describing what you read is perfect.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </section>
 
@@ -328,43 +371,6 @@
                 </div>
             </div>
 
-            <!-- FEATURE 3: CHIPP.AI BOT EMBED -->
-            <div id="chat" class="mt-8 bg-white rounded-3xl border border-indigo-100 shadow-xl overflow-hidden scroll-mt-20">
-                <div class="bg-indigo-600 p-6 text-white text-center">
-                    <h3 class="text-2xl font-bold mb-2 flex items-center justify-center gap-2">
-                        <i data-lucide="bot" class="w-8 h-8"></i> Chat with PIRLS Pal
-                    </h3>
-                    <p class="text-indigo-100">Got a specific question? Ask our expert bot!</p>
-                </div>
-                
-                <div class="p-12 text-center bg-slate-50 flex flex-col items-center justify-center min-h-[400px]">
-                    <div class="bg-white p-8 rounded-2xl shadow-lg border border-indigo-100 max-w-lg w-full relative overflow-hidden">
-                        <!-- Decorative blob behind -->
-                        <div class="absolute top-0 right-0 w-32 h-32 bg-indigo-50 rounded-bl-full -mr-16 -mt-16 z-0"></div>
-                        
-                        <div class="relative z-10">
-                            <div class="w-20 h-20 bg-indigo-100 rounded-full flex items-center justify-center mx-auto mb-6 text-indigo-600 shadow-inner">
-                                <i data-lucide="message-circle" class="w-10 h-10"></i>
-                            </div>
-                            
-                            <h3 class="text-2xl font-bold text-slate-800 mb-3">Ready to Chat?</h3>
-                            <p class="text-slate-600 mb-8 text-lg">
-                                PIRLS Pal is waiting in a secure window to answer all your questions about the test.
-                            </p>
-                            
-                            <a href="https://app.chipp.ai/w/chat/pirlspal-10038831/session/94285526-42e8-41f5-bb59-987ff164a02b" 
-                               target="_blank" 
-                               rel="noopener noreferrer" 
-                               class="inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white px-8 py-4 rounded-xl font-bold text-lg shadow-lg transition transform hover:scale-105 hover:shadow-indigo-200">
-                                Launch Chatbot <i data-lucide="external-link" class="w-5 h-5"></i>
-                            </a>
-                            
-                            <p class="mt-4 text-xs text-slate-400">Opens in a new tab</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
         </div>
     </section>
 
@@ -398,6 +404,46 @@
         </div>
     </section>
 
+    <!-- NEW SECTION: PDF Downloads -->
+    <section id="downloads" class="py-20 bg-slate-50 border-t border-slate-200">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl font-bold text-slate-800 mb-4">Offline Practice Tests</h2>
+                <p class="text-slate-600 max-w-lg mx-auto">Want to practice with a real paper and pencil? Ask your teacher to help you download these sample booklets.</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-6">
+                <!-- PDF Card 1 -->
+                <a href="P06_UG_SamplePassages1_Items.pdf" target="_blank" class="group bg-white p-6 rounded-2xl border border-slate-200 hover:border-red-300 hover:ring-4 hover:ring-red-50 shadow-sm hover:shadow-lg transition flex items-center gap-5 text-left">
+                    <div class="bg-red-100 text-red-600 p-4 rounded-xl group-hover:bg-red-600 group-hover:text-white transition shadow-inner">
+                        <i data-lucide="file-text" class="w-8 h-8"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="font-bold text-lg text-slate-800 group-hover:text-red-700 transition">PIRLS 2006 Sample Pack</h3>
+                        <p class="text-xs text-slate-500 font-bold uppercase tracking-wider mt-1">Antarctica, Clay, Night, & Food</p>
+                    </div>
+                    <i data-lucide="download" class="w-5 h-5 text-slate-300 ml-auto group-hover:text-red-500 group-hover:translate-y-1 transition"></i>
+                </a>
+
+                <!-- PDF Card 2 -->
+                <a href="passage_full.pdf" target="_blank" class="group bg-white p-6 rounded-2xl border border-slate-200 hover:border-red-300 hover:ring-4 hover:ring-red-50 shadow-sm hover:shadow-lg transition flex items-center gap-5 text-left">
+                    <div class="bg-red-100 text-red-600 p-4 rounded-xl group-hover:bg-red-600 group-hover:text-white transition shadow-inner">
+                        <i data-lucide="file-bar-chart-2" class="w-8 h-8"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="font-bold text-lg text-slate-800 group-hover:text-red-700 transition">PIRLS 2011 Sample Pack</h3>
+                        <p class="text-xs text-slate-500 font-bold uppercase tracking-wider mt-1">Enemy Pie, Hiking, & More</p>
+                    </div>
+                    <i data-lucide="download" class="w-5 h-5 text-slate-300 ml-auto group-hover:text-red-500 group-hover:translate-y-1 transition"></i>
+                </a>
+            </div>
+            
+            <p class="text-center text-xs text-slate-400 mt-6 italic">
+                * These are sample materials for practice only. Actual test content will vary.
+            </p>
+        </div>
+    </section>
+
     <!-- Footer -->
     <footer class="bg-blue-900 text-white py-12">
         <div class="max-w-4xl mx-auto px-4 text-center">
@@ -409,6 +455,19 @@
             </div>
         </div>
     </footer>
+
+    <!-- Floating Chat Button -->
+    <a href="https://pirlspal-10038831.chipp.ai" target="_blank" rel="noopener noreferrer" 
+    class="fixed bottom-6 right-6 z-50 flex items-center gap-3 group">
+        <!-- Speech Bubble (Text) -->
+        <div class="bg-white text-blue-900 px-4 py-2 rounded-xl shadow-lg border border-blue-100 font-bold text-sm transform transition-all group-hover:scale-105 origin-right hidden md:block animate-float">
+            Have questions? Click here! 👋
+        </div>
+        <!-- Button (Icon) -->
+        <div class="bg-indigo-600 text-white p-4 rounded-full shadow-xl hover:bg-indigo-700 transition transform hover:scale-110 hover:rotate-12 border-4 border-white">
+            <i data-lucide="message-circle-question" class="w-8 h-8"></i>
+        </div>
+    </a>
 
     <!-- Initialize Lucide Icons -->
     <script>
