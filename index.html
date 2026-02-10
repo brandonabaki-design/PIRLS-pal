@@ -138,7 +138,7 @@
     </nav>
 
     <!-- Hero Section -->
-    <header class="relative pt-16 pb-2 lg:pt-24 lg:pb-12">
+    <header class="relative pt-16 pb-8 lg:pt-24 lg:pb-12">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 text-center">
             <div class="inline-block bg-blue-100 text-blue-800 px-4 py-1.5 rounded-full text-sm font-bold mb-6 animate-bounce">
                 🎓 Coming Soon to Your School!
@@ -184,7 +184,7 @@
             </div>
 
             <!-- Navigation Arrow -->
-            <div class="mt-1 animate-bounce text-blue-300">
+            <div class="mt-6 animate-bounce text-blue-300">
                 <a href="#expect" class="inline-block p-2 hover:text-blue-600 transition">
                     <i data-lucide="chevron-down" class="w-10 h-10"></i>
                 </a>
@@ -630,13 +630,76 @@
 
     <!-- Gemini API Logic -->
     <script>
-        const apiKey = ""; // System will inject key
+        const apiKey = ""; // Empty string for GitHub deployment
+
+        // ---------------------------------------------------------
+        // MOCK DATA (Simulation Mode for GitHub/Offline use)
+        // ---------------------------------------------------------
+        const mockStories = {
+            'Dinosaurs': `**The Text:**
+Long ago, the T-Rex was the king of the dinosaurs. It had huge teeth and tiny arms. Even though its arms were small, it was very strong. The T-Rex walked on two legs and hunted for food in the jungle.
+
+**Quick Question:**
+What is true about the T-Rex?
+* A) It had huge arms.
+* B) It walked on four legs.
+* C) It was very strong.
+
+**Answer:**
+C) It was very strong. The text says "it was very strong" even though it had small arms.`,
+
+            'Space Adventure': `**The Text:**
+Mia looked out the window of her rocket ship. The moon was getting closer! It looked like a big, grey rock with holes in it. "Preparing for landing," she said. She was ready to be the first kid to walk on the moon.
+
+**Quick Question:**
+What did the moon look like to Mia?
+* A) A big yellow cheese.
+* B) A grey rock with holes.
+* C) A bright shining star.
+
+**Answer:**
+B) A grey rock with holes. The text describes it as a "big, grey rock with holes in it."`,
+
+            'Friendship': `**The Text:**
+Leo had a new toy car. His friend Sam really wanted to play with it. Leo felt sad when he had to share, but then he saw Sam smile. Playing together was much more fun than playing alone.
+
+**Quick Question:**
+Why did playing together become fun?
+* A) Because Sam brought his own car.
+* B) Because Leo liked seeing Sam smile.
+* C) Because the car broke.
+
+**Answer:**
+B) Because Leo liked seeing Sam smile. The text implies Leo realized sharing made them both happy.`,
+            
+            'default': `**The Text:**
+The library is a quiet place full of adventures. You can travel to the past, the future, or magical worlds just by opening a book. Every shelf holds a new surprise waiting to be discovered.
+
+**Quick Question:**
+What can you find on every shelf?
+* A) A new surprise.
+* B) A loud noise.
+* C) A computer.
+
+**Answer:**
+A) A new surprise. The text says "Every shelf holds a new surprise."`
+        };
+
+        const mockBoosts = [
+            "You are doing great! Just breathe and believe in yourself. 🌟",
+            "Trust your brain! You have learned so much already. 🧠",
+            "It's normal to be nervous. That just means you care! You got this. 💪",
+            "One question at a time. You are a reading superstar! ⭐"
+        ];
+
+        // ---------------------------------------------------------
+        // LOGIC
+        // ---------------------------------------------------------
 
         let currentLevel = 'Medium';
 
         function setLevel(level) {
             currentLevel = level;
-            // Update UI classes
             ['Easy', 'Medium', 'Hard'].forEach(l => {
                 const btn = document.getElementById(`btn-${l}`);
                 if (l === level) {
@@ -647,33 +710,44 @@
             });
         }
 
-        async function callGemini(prompt) {
+        async function callGemini(prompt, type) {
+            // SIMULATION MODE: If no API key, use mock data
+            if (!apiKey || apiKey === "") {
+                console.log("No API Key detected. Using Simulation Mode.");
+                await new Promise(r => setTimeout(r, 1500)); // Fake delay for realism
+                
+                if (type === 'boost') {
+                    return mockBoosts[Math.floor(Math.random() * mockBoosts.length)];
+                } else {
+                    // Try to match topic keywords
+                    if (prompt.includes('Dinosaurs')) return mockStories['Dinosaurs'];
+                    if (prompt.includes('Space')) return mockStories['Space Adventure'];
+                    if (prompt.includes('Friendship')) return mockStories['Friendship'];
+                    return mockStories['default'];
+                }
+            }
+
+            // REAL AI MODE
             const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
             const payload = {
                 contents: [{ parts: [{ text: prompt }] }]
             };
 
-            let attempts = 0;
-            const maxAttempts = 5;
-            const delays = [1000, 2000, 4000, 8000, 16000];
+            try {
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
 
-            while (attempts < maxAttempts) {
-                try {
-                    const response = await fetch(url, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(payload)
-                    });
-
-                    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-                    
-                    const data = await response.json();
-                    return data.candidates?.[0]?.content?.parts?.[0]?.text || "I couldn't think of a response right now. Try again!";
-                } catch (error) {
-                    attempts++;
-                    if (attempts === maxAttempts) return "Oops! The internet hiccups are real. Please try again.";
-                    await new Promise(r => setTimeout(r, delays[attempts - 1]));
-                }
+                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                
+                const data = await response.json();
+                return data.candidates?.[0]?.content?.parts?.[0]?.text || "I couldn't think of a response right now. Try again!";
+            } catch (error) {
+                // Fallback to mock if API fails
+                if (type === 'boost') return mockBoosts[0];
+                return mockStories['default'];
             }
         }
 
@@ -681,7 +755,6 @@
         async function generatePassage(topic, type) {
             showPassageLoading(true);
             
-            // Define level characteristics
             let levelInstruction = "";
             if (currentLevel === 'Easy') levelInstruction = "Use simple vocabulary, shorter sentences, and very clear structure (lower 4th grade level).";
             if (currentLevel === 'Medium') levelInstruction = "Use standard 4th grade vocabulary and sentence structure.";
@@ -706,7 +779,8 @@
             **Answer:**
             (The correct letter and a brief explanation why)`;
 
-            const result = await callGemini(prompt);
+            // Pass 'story' type to help mock selector
+            const result = await callGemini(prompt, 'story');
             renderPassage(result);
             showPassageLoading(false);
         }
@@ -775,7 +849,8 @@
 
             const prompt = `You are a kind, supportive teacher speaking to a 4th grade student who is about to take a reading test. They say: "${feeling}". Write a short (2-3 sentences), warm, and encouraging response to boost their confidence. Use simple language. Add one emoji.`;
 
-            const result = await callGemini(prompt);
+            // Pass 'boost' type to help mock selector
+            const result = await callGemini(prompt, 'boost');
             
             document.getElementById('boostText').innerText = result;
             showBoostLoading(false);
