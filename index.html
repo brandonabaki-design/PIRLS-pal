@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Get Ready for PIRLS!</title>
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Tailwind CSS with Typography Plugin -->
+    <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;600&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
     <!-- Lucide Icons -->
@@ -104,11 +104,32 @@
             <p class="text-xl text-slate-600 mb-10 max-w-2xl mx-auto">
                 You've been reading amazing stories and cool facts in class. Now, it's time to show off your skills in the <strong>PIRLS</strong> activity.
             </p>
-            <div class="flex justify-center gap-4">
+            <div class="flex justify-center gap-4 mb-16">
                 <a href="#practice" class="bg-blue-600 text-white px-8 py-4 rounded-xl font-bold text-lg shadow-lg hover:bg-blue-700 transition transform hover:scale-105 flex items-center gap-2">
                     Try the Practice Zone ✨ <i data-lucide="sparkles" class="w-5 h-5"></i>
                 </a>
             </div>
+
+            <!-- Video Player Embed -->
+            <div class="relative max-w-4xl mx-auto transform transition-all hover:scale-[1.01] duration-500">
+                <!-- Glowing backdrop effect -->
+                <div class="absolute -inset-1 bg-gradient-to-r from-blue-400 via-purple-400 to-teal-400 rounded-3xl blur opacity-30 animate-pulse"></div>
+                
+                <!-- Video Container -->
+                <div class="relative bg-white p-4 rounded-3xl shadow-2xl border border-white/50">
+                    <div class="aspect-video rounded-2xl overflow-hidden bg-slate-900 shadow-inner relative">
+                        <video class="w-full h-full object-cover" controls preload="metadata" poster="https://placehold.co/1280x720/1e293b/ffffff?text=Start+Your+Adventure+▶">
+                            <source src="Your_PIRLS_Reading_Adventure!.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                    <div class="mt-4 flex items-center justify-center gap-2 text-blue-900/70 font-bold text-sm uppercase tracking-widest">
+                        <i data-lucide="clapperboard" class="w-4 h-4"></i>
+                        <span>Watch: Your Adventure Guide</span>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </header>
 
@@ -237,6 +258,13 @@
                         </div>
                     </div>
 
+                    <!-- Level Selector -->
+                    <div class="bg-blue-100/50 p-1 rounded-lg flex gap-1 mb-4">
+                        <button onclick="setLevel('Easy')" id="btn-Easy" class="flex-1 py-1.5 px-3 rounded-md text-sm font-bold transition text-blue-400 hover:text-blue-600">Easy</button>
+                        <button onclick="setLevel('Medium')" id="btn-Medium" class="flex-1 py-1.5 px-3 rounded-md text-sm font-bold transition bg-white text-blue-600 shadow-sm">Medium</button>
+                        <button onclick="setLevel('Hard')" id="btn-Hard" class="flex-1 py-1.5 px-3 rounded-md text-sm font-bold transition text-blue-400 hover:text-blue-600">Challenge</button>
+                    </div>
+
                     <div class="space-y-4">
                         <div class="grid grid-cols-3 gap-2">
                             <button onclick="generatePassage('Dinosaurs', 'Fact')" class="bg-white border border-blue-200 hover:bg-blue-100 text-blue-800 py-2 rounded-lg text-sm font-semibold transition">🦖 Dinosaurs</button>
@@ -306,18 +334,33 @@
                     <h3 class="text-2xl font-bold mb-2 flex items-center justify-center gap-2">
                         <i data-lucide="bot" class="w-8 h-8"></i> Chat with PIRLS Pal
                     </h3>
-                    <p class="text-indigo-100">Got a specific question? Ask our expert bot below!</p>
+                    <p class="text-indigo-100">Got a specific question? Ask our expert bot!</p>
                 </div>
-                <div class="h-[600px] w-full bg-slate-50 relative">
-                    <iframe 
-                        src="https://app.chipp.ai/w/chat/pirlspal-10038831/session/94285526-42e8-41f5-bb59-987ff164a02b"
-                        class="w-full h-full border-0"
-                        title="PIRLS Pal Chatbot"
-                        allow="microphone">
-                    </iframe>
-                    <!-- Fallback message behind iframe -->
-                    <div class="absolute inset-0 flex items-center justify-center -z-10 text-slate-400">
-                        Loading Chatbot...
+                
+                <div class="p-12 text-center bg-slate-50 flex flex-col items-center justify-center min-h-[400px]">
+                    <div class="bg-white p-8 rounded-2xl shadow-lg border border-indigo-100 max-w-lg w-full relative overflow-hidden">
+                        <!-- Decorative blob behind -->
+                        <div class="absolute top-0 right-0 w-32 h-32 bg-indigo-50 rounded-bl-full -mr-16 -mt-16 z-0"></div>
+                        
+                        <div class="relative z-10">
+                            <div class="w-20 h-20 bg-indigo-100 rounded-full flex items-center justify-center mx-auto mb-6 text-indigo-600 shadow-inner">
+                                <i data-lucide="message-circle" class="w-10 h-10"></i>
+                            </div>
+                            
+                            <h3 class="text-2xl font-bold text-slate-800 mb-3">Ready to Chat?</h3>
+                            <p class="text-slate-600 mb-8 text-lg">
+                                PIRLS Pal is waiting in a secure window to answer all your questions about the test.
+                            </p>
+                            
+                            <a href="https://app.chipp.ai/w/chat/pirlspal-10038831/session/94285526-42e8-41f5-bb59-987ff164a02b" 
+                               target="_blank" 
+                               rel="noopener noreferrer" 
+                               class="inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white px-8 py-4 rounded-xl font-bold text-lg shadow-lg transition transform hover:scale-105 hover:shadow-indigo-200">
+                                Launch Chatbot <i data-lucide="external-link" class="w-5 h-5"></i>
+                            </a>
+                            
+                            <p class="mt-4 text-xs text-slate-400">Opens in a new tab</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -376,6 +419,21 @@
     <script>
         const apiKey = ""; // System will inject key
 
+        let currentLevel = 'Medium';
+
+        function setLevel(level) {
+            currentLevel = level;
+            // Update UI classes
+            ['Easy', 'Medium', 'Hard'].forEach(l => {
+                const btn = document.getElementById(`btn-${l}`);
+                if (l === level) {
+                    btn.className = "flex-1 py-1.5 px-3 rounded-md text-sm font-bold transition bg-white text-blue-600 shadow-sm ring-1 ring-blue-200";
+                } else {
+                    btn.className = "flex-1 py-1.5 px-3 rounded-md text-sm font-bold transition text-blue-400 hover:text-blue-600 hover:bg-blue-50";
+                }
+            });
+        }
+
         async function callGemini(prompt) {
             const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
             const payload = {
@@ -410,20 +468,30 @@
         async function generatePassage(topic, type) {
             showPassageLoading(true);
             
-            const prompt = `Write a very short, engaging, 4th-grade level ${type === 'Fact' ? 'informational text' : 'story'} (approx 60-80 words) about ${topic}. 
-            Structure your response exactly like this:
+            // Define level characteristics
+            let levelInstruction = "";
+            if (currentLevel === 'Easy') levelInstruction = "Use simple vocabulary, shorter sentences, and very clear structure (lower 4th grade level).";
+            if (currentLevel === 'Medium') levelInstruction = "Use standard 4th grade vocabulary and sentence structure.";
+            if (currentLevel === 'Hard') levelInstruction = "Use slightly advanced vocabulary and more complex sentence structures (challenging for 4th grade).";
+
+            const prompt = `Write a short, engaging ${type === 'Fact' ? 'informational text' : 'story'} (approx 60-100 words) about ${topic}. 
+            
+            Difficulty Level: ${currentLevel}. ${levelInstruction}
+            
+            Structure your response exactly like this with these specific headers:
             
             **The Text:**
             (The story/text goes here)
 
             **Quick Question:**
-            (A multiple choice question about the text)
-            A) (Option 1)
-            B) (Option 2)
-            C) (Option 3)
+            (A multiple choice question about the text. ensure options are on separate lines)
+            
+            * A) (Option 1)
+            * B) (Option 2)
+            * C) (Option 3)
 
             **Answer:**
-            (The correct letter)`;
+            (The correct letter and a brief explanation why)`;
 
             const result = await callGemini(prompt);
             renderPassage(result);
@@ -450,10 +518,38 @@
         }
 
         function renderPassage(text) {
-            // Simple parsing to hide answer initially or format it nice
-            // Replacing newlines with breaks for simple formatting
-            const html = marked.parse(text);
-            document.getElementById('passageResult').innerHTML = html;
+            // Split answer from the rest to hide it
+            const parts = text.split('**Answer:**');
+            const mainContent = parts[0]; 
+            const answerContent = parts[1] ? parts[1].trim() : "Answer not found.";
+
+            const htmlMain = marked.parse(mainContent);
+            const htmlAnswer = marked.parse(answerContent);
+            
+            const container = document.getElementById('passageResult');
+            container.innerHTML = `
+                <div class="prose prose-sm prose-blue max-w-none">
+                    ${htmlMain}
+                </div>
+                <div class="mt-6 pt-4 border-t border-blue-100 flex flex-col items-start">
+                    <button onclick="this.nextElementSibling.classList.remove('hidden'); this.style.display='none'" 
+                            class="bg-yellow-400 hover:bg-yellow-500 text-yellow-900 px-4 py-2 rounded-lg text-sm font-bold transition shadow-sm flex items-center gap-2">
+                        👀 Reveal Answer
+                    </button>
+                    <div class="hidden w-full bg-green-50 border border-green-200 rounded-xl p-4 mt-2 animate-in fade-in slide-in-from-top-2">
+                        <div class="flex items-start gap-3">
+                            <div class="bg-green-100 p-2 rounded-full text-green-600 mt-1">
+                                <i data-lucide="check" class="w-4 h-4"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-green-900 text-sm uppercase tracking-wide mb-1">Correct Answer</h4>
+                                <div class="text-green-800 text-sm">${htmlAnswer}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            lucide.createIcons();
         }
 
 
