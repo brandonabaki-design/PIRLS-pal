@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get Ready for PIRLS!</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;600&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Markdown Parser -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    
+    <style>
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: #f0f9ff;
+        }
+        h1, h2, h3 {
+            font-family: 'Fredoka', sans-serif;
+        }
+        .blob {
+            position: absolute;
+            filter: blur(40px);
+            z-index: -1;
+            opacity: 0.5;
+            animation: move 10s infinite alternate;
+        }
+        @keyframes move {
+            from { transform: translate(0, 0) scale(1); }
+            to { transform: translate(20px, -20px) scale(1.1); }
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #e0f2fe; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #38bdf8; 
+            border-radius: 5px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #0ea5e9; 
+        }
+        .loading-dots:after {
+            content: ' .';
+            animation: dots 1s steps(5, end) infinite;
+        }
+        @keyframes dots {
+            0%, 20% { content: ' .'; }
+            40% { content: ' ..'; }
+            60% { content: ' ...'; }
+            80%, 100% { content: ' '; }
+        }
+    </style>
+</head>
+<body class="text-slate-700 overflow-x-hidden">
+
+    <!-- Background Blobs -->
+    <div class="blob bg-blue-300 w-64 h-64 rounded-full top-0 left-0 -translate-x-1/2 -translate-y-1/2"></div>
+    <div class="blob bg-yellow-200 w-96 h-96 rounded-full bottom-0 right-0 translate-x-1/3 translate-y-1/3"></div>
+
+    <!-- Navigation -->
+    <nav class="bg-white/80 backdrop-blur-md sticky top-0 z-50 border-b border-blue-100 shadow-sm">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center gap-2">
+                    <div class="bg-blue-600 text-white p-2 rounded-lg">
+                        <i data-lucide="book-open" class="w-6 h-6"></i>
+                    </div>
+                    <span class="font-bold text-xl text-blue-900 tracking-wide">PIRLS Explorer</span>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#what" class="text-blue-900 hover:text-blue-600 font-bold transition">What is it?</a>
+                    <a href="#expect" class="text-blue-900 hover:text-blue-600 font-bold transition">The Mission</a>
+                    <a href="#practice" class="text-blue-900 hover:text-blue-600 font-bold transition">Practice Zone ✨</a>
+                    <a href="#chat" class="text-blue-900 hover:text-blue-600 font-bold transition">Ask AI 🤖</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="relative pt-16 pb-20 lg:pt-24 lg:pb-28">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 text-center">
+            <div class="inline-block bg-blue-100 text-blue-800 px-4 py-1.5 rounded-full text-sm font-bold mb-6 animate-bounce">
+                🎓 Coming Soon to Your School!
+            </div>
+            <h1 class="text-4xl sm:text-6xl font-bold text-blue-900 mb-6 leading-tight">
+                Ready to Show the World <br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-teal-500">How You Read?</span>
+            </h1>
+            <p class="text-xl text-slate-600 mb-10 max-w-2xl mx-auto">
+                You've been reading amazing stories and cool facts in class. Now, it's time to show off your skills in the <strong>PIRLS</strong> activity.
+            </p>
+            <div class="flex justify-center gap-4">
+                <a href="#practice" class="bg-blue-600 text-white px-8 py-4 rounded-xl font-bold text-lg shadow-lg hover:bg-blue-700 transition transform hover:scale-105 flex items-center gap-2">
+                    Try the Practice Zone ✨ <i data-lucide="sparkles" class="w-5 h-5"></i>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Section 1: What is PIRLS? (The "Why") -->
+    <section id="what" class="py-16 bg-white relative">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-blue-900 mb-4">What is this all about?</h2>
+                <div class="w-20 h-1.5 bg-yellow-400 mx-auto rounded-full"></div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="order-2 md:order-1 space-y-6">
+                    <div class="flex gap-4">
+                        <div class="flex-shrink-0 w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center text-blue-600">
+                            <i data-lucide="globe-2" class="w-6 h-6"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-slate-800 mb-2">It's Global!</h3>
+                            <p class="text-slate-600">PIRLS stands for <em>Progress in International Reading Literacy Study</em>. Students all over the planet (in more than 50 countries!) take this same assessment.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="flex-shrink-0 w-12 h-12 bg-teal-100 rounded-full flex items-center justify-center text-teal-600">
+                            <i data-lucide="school" class="w-6 h-6"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-slate-800 mb-2">Helping Schools</h3>
+                            <p class="text-slate-600">It helps teachers and principals understand how to make reading lessons even better for future students.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="flex-shrink-0 w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center text-purple-600">
+                            <i data-lucide="trophy" class="w-6 h-6"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-slate-800 mb-2">No Grades for You</h3>
+                            <p class="text-slate-600">Don't worry! This doesn't go on your report card. It's about seeing how our whole country is doing in reading.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="order-1 md:order-2 bg-slate-50 p-8 rounded-2xl border border-slate-200 relative">
+                    <!-- Decorative Element -->
+                    <div class="absolute -top-4 -right-4 bg-yellow-400 text-yellow-900 font-bold px-4 py-2 rounded-lg shadow-sm transform rotate-3">
+                        Fun Fact!
+                    </div>
+                    <h3 class="text-2xl font-bold text-slate-800 mb-4">Did you know?</h3>
+                    <p class="text-lg text-slate-600 mb-6">
+                        PIRLS happens every <strong>5 years</strong>. That means you are part of a very special group chosen to represent your grade this year!
+                    </p>
+                    <div class="flex items-center justify-center">
+                       <i data-lucide="map" class="w-32 h-32 text-blue-200"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 2: What to Expect (The "Content") -->
+    <section id="expect" class="py-16 bg-blue-50">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6">
+            <div class="text-center mb-16">
+                <span class="text-blue-600 font-bold tracking-wider uppercase text-sm">The Format</span>
+                <h2 class="text-3xl font-bold text-blue-900 mt-2 mb-4">Your Reading Mission</h2>
+                <p class="text-slate-600 max-w-2xl mx-auto">You will be given a booklet or a tablet with interesting things to read. There are two main types of reading you will do.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Card 1 -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-blue-100 card-hover relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-orange-100 rounded-bl-full -mr-16 -mt-16 z-0"></div>
+                    <div class="relative z-10">
+                        <div class="w-14 h-14 bg-orange-500 text-white rounded-xl flex items-center justify-center mb-6 shadow-lg shadow-orange-200">
+                            <i data-lucide="book-heart" class="w-8 h-8"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-slate-800 mb-3">1. Reading for Fun</h3>
+                        <p class="text-slate-600 mb-4">
+                            You will read a story. It might be an adventure, a mystery, or a tale about friendship.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-blue-100 card-hover relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-blue-100 rounded-bl-full -mr-16 -mt-16 z-0"></div>
+                    <div class="relative z-10">
+                        <div class="w-14 h-14 bg-blue-500 text-white rounded-xl flex items-center justify-center mb-6 shadow-lg shadow-blue-200">
+                            <i data-lucide="search" class="w-8 h-8"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-slate-800 mb-3">2. Reading for Facts</h3>
+                        <p class="text-slate-600 mb-4">
+                            You will read an article or document to learn something new. It might be about animals, history, or science.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEW SECTION: AI Interactive Features -->
+    <section id="practice" class="py-16 bg-white relative overflow-hidden">
+        <!-- Decoration -->
+        <div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-blue-400 via-purple-400 to-teal-400"></div>
+        
+        <div class="max-w-6xl mx-auto px-4 sm:px-6">
+            <div class="text-center mb-12">
+                <span class="inline-flex items-center gap-2 bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider mb-2">
+                    <i data-lucide="sparkles" class="w-3 h-3"></i> Powered by Gemini AI
+                </span>
+                <h2 class="text-3xl font-bold text-slate-900">Interactive Practice Zone</h2>
+                <p class="text-slate-600 mt-2">Try these magic tools to get ready!</p>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-8 mb-16">
+                
+                <!-- FEATURE 1: Reading Passage Generator -->
+                <div class="bg-gradient-to-b from-blue-50 to-white p-8 rounded-3xl border border-blue-100 shadow-lg">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="bg-blue-600 text-white p-3 rounded-xl shadow-md">
+                            <i data-lucide="pen-tool" class="w-6 h-6"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-blue-900">Mini-Reading Generator</h3>
+                            <p class="text-sm text-blue-600">Pick a topic, get a short story & question!</p>
+                        </div>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div class="grid grid-cols-3 gap-2">
+                            <button onclick="generatePassage('Dinosaurs', 'Fact')" class="bg-white border border-blue-200 hover:bg-blue-100 text-blue-800 py-2 rounded-lg text-sm font-semibold transition">🦖 Dinosaurs</button>
+                            <button onclick="generatePassage('Space Adventure', 'Story')" class="bg-white border border-blue-200 hover:bg-blue-100 text-blue-800 py-2 rounded-lg text-sm font-semibold transition">🚀 Space</button>
+                            <button onclick="generatePassage('Friendship', 'Story')" class="bg-white border border-blue-200 hover:bg-blue-100 text-blue-800 py-2 rounded-lg text-sm font-semibold transition">🤝 Friends</button>
+                        </div>
+                        
+                        <div class="flex gap-2">
+                            <input type="text" id="customTopic" placeholder="Or type your own topic..." class="flex-1 px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-400 outline-none text-sm">
+                            <button onclick="generateCustomPassage()" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-bold transition flex items-center gap-1">
+                                Go ✨
+                            </button>
+                        </div>
+
+                        <!-- Result Area -->
+                        <div id="passageResult" class="hidden mt-6 bg-white p-6 rounded-xl border border-blue-100 min-h-[200px] shadow-inner text-sm">
+                            <!-- Content injected here -->
+                        </div>
+                        <div id="passageLoader" class="hidden mt-6 text-center py-8">
+                            <div class="inline-block animate-spin text-blue-500 mb-2">
+                                <i data-lucide="loader-2" class="w-8 h-8"></i>
+                            </div>
+                            <p class="text-blue-500 font-bold loading-dots">Writing a story for you</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FEATURE 2: Confidence Booster -->
+                <div class="bg-gradient-to-b from-purple-50 to-white p-8 rounded-3xl border border-purple-100 shadow-lg flex flex-col">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="bg-purple-600 text-white p-3 rounded-xl shadow-md">
+                            <i data-lucide="heart-handshake" class="w-6 h-6"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-purple-900">Confidence Booster</h3>
+                            <p class="text-sm text-purple-600">Feeling nervous? Let's talk about it.</p>
+                        </div>
+                    </div>
+
+                    <div class="flex-1 flex flex-col">
+                        <label class="text-sm font-bold text-slate-700 mb-2">How are you feeling right now?</label>
+                        <textarea id="feelingInput" class="w-full p-4 border border-purple-200 rounded-xl focus:ring-2 focus:ring-purple-400 outline-none resize-none bg-white mb-4" rows="3" placeholder="e.g., I'm scared I won't finish in time..."></textarea>
+                        
+                        <button onclick="getBoost()" class="w-full bg-purple-600 hover:bg-purple-700 text-white py-3 rounded-xl font-bold transition shadow-md flex justify-center items-center gap-2 mb-6">
+                            Boost My Confidence! ✨
+                        </button>
+
+                        <!-- Result Area -->
+                        <div id="boostResult" class="hidden bg-purple-100 p-6 rounded-xl border border-purple-200 text-purple-900 relative">
+                            <i data-lucide="quote" class="w-8 h-8 text-purple-300 absolute top-2 left-2 opacity-50"></i>
+                            <div id="boostText" class="relative z-10 italic font-medium text-lg leading-relaxed"></div>
+                        </div>
+                        
+                        <div id="boostLoader" class="hidden text-center py-4">
+                            <div class="inline-block animate-spin text-purple-500">
+                                <i data-lucide="loader-2" class="w-6 h-6"></i>
+                            </div>
+                            <span class="text-purple-500 ml-2 font-bold loading-dots">Thinking of something nice</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FEATURE 3: CHIPP.AI BOT EMBED -->
+            <div id="chat" class="mt-8 bg-white rounded-3xl border border-indigo-100 shadow-xl overflow-hidden scroll-mt-20">
+                <div class="bg-indigo-600 p-6 text-white text-center">
+                    <h3 class="text-2xl font-bold mb-2 flex items-center justify-center gap-2">
+                        <i data-lucide="bot" class="w-8 h-8"></i> Chat with PIRLS Pal
+                    </h3>
+                    <p class="text-indigo-100">Got a specific question? Ask our expert bot below!</p>
+                </div>
+                <div class="h-[600px] w-full bg-slate-50 relative">
+                    <iframe 
+                        src="https://app.chipp.ai/w/chat/pirlspal-10038831/session/94285526-42e8-41f5-bb59-987ff164a02b"
+                        class="w-full h-full border-0"
+                        title="PIRLS Pal Chatbot"
+                        allow="microphone">
+                    </iframe>
+                    <!-- Fallback message behind iframe -->
+                    <div class="absolute inset-0 flex items-center justify-center -z-10 text-slate-400">
+                        Loading Chatbot...
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Section 3: How to Prepare (The "Tips") -->
+    <section id="tips" class="py-16 bg-blue-50">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6">
+            <h2 class="text-3xl font-bold text-blue-900 mb-12 text-center">How to be a PIRLS Pro</h2>
+            
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- Tip 1 -->
+                <div class="bg-white p-6 rounded-2xl border border-green-200 shadow-sm">
+                    <div class="w-12 h-12 rounded-full flex items-center justify-center bg-green-100 text-green-600 font-bold text-xl mb-4">1</div>
+                    <h3 class="text-xl font-bold text-green-900 mb-2">Don't Cram!</h3>
+                    <p class="text-slate-600">The best practice is simply reading books you enjoy.</p>
+                </div>
+                
+                <!-- Tip 2 -->
+                <div class="bg-white p-6 rounded-2xl border border-blue-200 shadow-sm">
+                    <div class="w-12 h-12 rounded-full flex items-center justify-center bg-blue-100 text-blue-600 font-bold text-xl mb-4">2</div>
+                    <h3 class="text-xl font-bold text-blue-900 mb-2">Power Up</h3>
+                    <p class="text-slate-600">Get sleep and eat a healthy breakfast so your brain has energy.</p>
+                </div>
+
+                <!-- Tip 3 -->
+                <div class="bg-white p-6 rounded-2xl border border-purple-200 shadow-sm">
+                    <div class="w-12 h-12 rounded-full flex items-center justify-center bg-purple-100 text-purple-600 font-bold text-xl mb-4">3</div>
+                    <h3 class="text-xl font-bold text-purple-900 mb-2">Stay Calm</h3>
+                    <p class="text-slate-600">If you don't know a word, just read the sentence around it to guess.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-blue-900 text-white py-12">
+        <div class="max-w-4xl mx-auto px-4 text-center">
+            <i data-lucide="star" class="w-12 h-12 text-yellow-400 mx-auto mb-4 fill-current"></i>
+            <h2 class="text-3xl font-bold mb-4">You've Got This!</h2>
+            <p class="text-blue-200 mb-8 text-lg">Believe in yourself, read carefully, and have fun with the stories.</p>
+            <div class="text-sm text-blue-400 border-t border-blue-800 pt-8">
+                Designed for Students • Progress in International Reading Literacy Study
+            </div>
+        </div>
+    </footer>
+
+    <!-- Initialize Lucide Icons -->
+    <script>
+        lucide.createIcons();
+    </script>
+
+    <!-- Gemini API Logic -->
+    <script>
+        const apiKey = ""; // System will inject key
+
+        async function callGemini(prompt) {
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+            const payload = {
+                contents: [{ parts: [{ text: prompt }] }]
+            };
+
+            let attempts = 0;
+            const maxAttempts = 5;
+            const delays = [1000, 2000, 4000, 8000, 16000];
+
+            while (attempts < maxAttempts) {
+                try {
+                    const response = await fetch(url, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+
+                    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                    
+                    const data = await response.json();
+                    return data.candidates?.[0]?.content?.parts?.[0]?.text || "I couldn't think of a response right now. Try again!";
+                } catch (error) {
+                    attempts++;
+                    if (attempts === maxAttempts) return "Oops! The internet hiccups are real. Please try again.";
+                    await new Promise(r => setTimeout(r, delays[attempts - 1]));
+                }
+            }
+        }
+
+        /* --- Feature 1: Passage Generator --- */
+        async function generatePassage(topic, type) {
+            showPassageLoading(true);
+            
+            const prompt = `Write a very short, engaging, 4th-grade level ${type === 'Fact' ? 'informational text' : 'story'} (approx 60-80 words) about ${topic}. 
+            Structure your response exactly like this:
+            
+            **The Text:**
+            (The story/text goes here)
+
+            **Quick Question:**
+            (A multiple choice question about the text)
+            A) (Option 1)
+            B) (Option 2)
+            C) (Option 3)
+
+            **Answer:**
+            (The correct letter)`;
+
+            const result = await callGemini(prompt);
+            renderPassage(result);
+            showPassageLoading(false);
+        }
+
+        function generateCustomPassage() {
+            const topic = document.getElementById('customTopic').value;
+            if(!topic.trim()) return;
+            generatePassage(topic, 'Story');
+        }
+
+        function showPassageLoading(isLoading) {
+            const resultDiv = document.getElementById('passageResult');
+            const loaderDiv = document.getElementById('passageLoader');
+            
+            if (isLoading) {
+                resultDiv.classList.add('hidden');
+                loaderDiv.classList.remove('hidden');
+            } else {
+                loaderDiv.classList.add('hidden');
+                resultDiv.classList.remove('hidden');
+            }
+        }
+
+        function renderPassage(text) {
+            // Simple parsing to hide answer initially or format it nice
+            // Replacing newlines with breaks for simple formatting
+            const html = marked.parse(text);
+            document.getElementById('passageResult').innerHTML = html;
+        }
+
+
+        /* --- Feature 2: Confidence Booster --- */
+        async function getBoost() {
+            const feeling = document.getElementById('feelingInput').value;
+            if(!feeling.trim()) return;
+
+            showBoostLoading(true);
+
+            const prompt = `You are a kind, supportive teacher speaking to a 4th grade student who is about to take a reading test. They say: "${feeling}". Write a short (2-3 sentences), warm, and encouraging response to boost their confidence. Use simple language. Add one emoji.`;
+
+            const result = await callGemini(prompt);
+            
+            document.getElementById('boostText').innerText = result;
+            showBoostLoading(false);
+        }
+
+        function showBoostLoading(isLoading) {
+            const resultDiv = document.getElementById('boostResult');
+            const loaderDiv = document.getElementById('boostLoader');
+            
+            if (isLoading) {
+                resultDiv.classList.add('hidden');
+                loaderDiv.classList.remove('hidden');
+            } else {
+                loaderDiv.classList.add('hidden');
+                resultDiv.classList.remove('hidden');
+            }
+        }
+    </script>
+</body>
+</html>
